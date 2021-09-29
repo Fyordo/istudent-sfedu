@@ -138,7 +138,7 @@ class AccountController extends Controller
 
         // use key 'http' even if you send the request to https://...
         $options = array(
-            'http' => array(
+            'https' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
                 'method'  => 'POST',
                 'content' => http_build_query($data)
@@ -149,7 +149,7 @@ class AccountController extends Controller
 
         // Create a stream
         $opts = array(
-            'http'=>array(
+            'https'=>array(
                 'method'=>"GET",
                 'header'=>"Authorization: Bearer " . $result->access_token
             )
