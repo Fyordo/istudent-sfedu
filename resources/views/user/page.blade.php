@@ -5,6 +5,7 @@ use App\Models\Classes\StudentClass;
 /* @var $ownerStudent StudentClass */
 
 ?>
+
 @extends('layouts.main')
 
 @section('title', isset($ownerStudent) ? $ownerStudent->name : "Ошибка")
