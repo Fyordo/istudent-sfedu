@@ -68,6 +68,14 @@ class AccountController extends Controller
 
                 $studentFind = Student::where('email', Auth::user()["email"])->first();
 
+                if (!($request->input('isHeadman') == null))
+                {
+                    Group::where("id", (integer)$request->input('groupId'))
+                        ->update([
+                            'headmanId' => Auth::id()
+                        ]);
+                }
+
                 Auth::logout();
                 Auth::login($studentFind, true);
                 return redirect(route('home'));
@@ -162,7 +170,6 @@ class AccountController extends Controller
         $isEmpty = Student::where('email', $file->userPrincipalName)->get()->isEmpty(); // Существует ли уже такой студент
 
         if($isEmpty){
-
             DB::table('students')->insert([
                 [
                     'name' => $file->displayName,

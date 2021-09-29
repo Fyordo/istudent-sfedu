@@ -2,6 +2,8 @@
 
 namespace App\Models\Classes;
 
+use App\Models\Student;
+
 class GroupClass
 {
     public int $id;
@@ -21,5 +23,30 @@ class GroupClass
     public function hasHeadman() : bool
     {
         return $this->headmanId != -1;
+    }
+
+    public function printGroup(): string
+    {
+        return $this->groupCourse . '.' . $this->groupNumber;
+    }
+
+    public function getStudents() : array
+    {
+        $arr = [];
+        $students = Student::where("groupId", $this->id)->get();
+
+        foreach ($students as $student)
+        {
+            array_push($arr, new StudentClass($student));
+        }
+
+        return $arr;
+    }
+
+    public function countStudents() : int
+    {
+        $students = Student::where("groupId", $this->id)->get();
+
+        return count($students);
     }
 }

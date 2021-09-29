@@ -45,12 +45,9 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     @if ($student->email != "lagutinfedya@gmail.com")
-                                        <a class="dropdown-item" href="#">Моя группа</a>
+                                        <a class="dropdown-item" href="{{route("group", ['id' => $student->groupId])}}">Моя группа</a>
                                     @endif
-                                        <a class="dropdown-item" href="#">Все группы</a>
-                                    @if ($student->email == "lagutinfedya@gmail.com")
-                                            <a class="dropdown-item" href="#">Создать группу</a>
-                                    @endif
+                                    <a class="dropdown-item" href="{{route("all")}}">Все группы</a>
                                 </div>
                             </div>
                         </li>

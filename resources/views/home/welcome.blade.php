@@ -26,7 +26,7 @@ use App\Models\Classes\StudentClass;
         <div class="container">
             <div class="row">
                 <div class="col-sm">
-                    @for ($i = 0; $i < sizeof($student->notifications); $i++)
+                    @for ($i = 0; $i < count($student->notifications); $i += 2)
                         <div class="GreyBox-2">
                             <div class="text-center">
                                 <h1>{{ $student->notifications[$i]->topic }}</h1>
@@ -37,7 +37,7 @@ use App\Models\Classes\StudentClass;
                     @endfor
                 </div>
                 <div class="col-sm">
-                    @for ($i = 1; $i < sizeof($student->notifications); $i++)
+                    @for ($i = 1; $i < count($student->notifications); $i += 2)
                         <div class="GreyBox-2">
                             <div class="text-center">
                                 <h1>{{ $student->notifications[$i]->topic }}</h1>
