@@ -104,8 +104,8 @@ class AccountController extends Controller
 
         $tenant = "common";
         $client_id = "cccbc182-4e70-41ed-a39a-5b658f2b0ee9";
-        $callback = "http://localhost:8000/callback";
-        //$callback = "https://istudent-sfedu.herokuapp.com/callback";
+        //$callback = "http://localhost:8000/callback";
+        $callback = "https://istudent-sfedu.herokuapp.com/callback";
         $scopes = ["User.Read"];
 
         $_SESSION["state"] = random_int(1, 200000);
@@ -138,8 +138,8 @@ class AccountController extends Controller
             'code' => $_REQUEST['code'],
             'client_id' => 'cccbc182-4e70-41ed-a39a-5b658f2b0ee9',
             'client_secret' => '-UA7Q~O8AzrUWBEaR16C7mys3jPamdrcrE37U',
-            'redirect_uri' => 'http://localhost:8000/callback',
-            //'redirect_uri' => 'https://istudent-sfedu.herokuapp.com/callback',
+            //'redirect_uri' => 'http://localhost:8000/callback',
+            'redirect_uri' => 'https://istudent-sfedu.herokuapp.com/callback',
         );
 
         // use key 'http' even if you send the request to https://...
