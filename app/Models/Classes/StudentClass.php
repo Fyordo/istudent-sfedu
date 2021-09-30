@@ -3,6 +3,7 @@
 namespace App\Models\Classes;
 
 use App\Models\Group;
+use App\Models\Notification;
 
 class StudentClass
 {
@@ -20,6 +21,13 @@ class StudentClass
         $this->groupId = $arr["groupId"];
         $this->isHeadman = $arr["isHeadman"];
         $this->notifications = [];
+
+        $notesDB = Notification::where("studentId", $this->id)->orderBy('date')->get();
+
+        foreach ($notesDB as $note)
+        {
+            array_push($this->notifications, new NotificationClass($note));
+        }
     }
 
     public function getGroup() : GroupClass

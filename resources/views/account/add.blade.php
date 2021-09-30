@@ -29,13 +29,13 @@ use App\Models\Classes\GroupClass;
     <form action="{{ route('loginAdd') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="newPassword">Введите новый пароль</label>
-            <input type="password" name="newPassword" placeholder="Введите новый пароль" id="newPassword" />
+            <label for="password">Введите новый пароль</label>
+            <input type="password" name="password" placeholder="Введите новый пароль" id="password" />
         </div>
         <br>
         <div class="form-group">
-            <label for="confirmNewPassword">Подтвердите новый пароль</label>
-            <input type="password" name="confirmNewPassword" placeholder="Подтвердите новый пароль" id="confirmNewPassword" />
+            <label for="password_confirmation">Подтвердите новый пароль</label>
+            <input type="password" name="password_confirmation" placeholder="Подтвердите новый пароль" id="password_confirmation" />
         </div>
         <br>
         <div class="form-group">

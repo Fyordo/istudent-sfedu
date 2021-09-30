@@ -50,7 +50,7 @@ use App\Models\Classes\StudentClass;
 
 
         <div class="col-sm">
-            <div class="text-center"><h2>Уведомления</h2></div>
+            <div class="text-center"><h2>Уведомления</h2>
             @if ($ownerStudent->id == $student->id || $student->isHeadman && $ownerStudent->groupId == $student->groupId)
                 <a href="#">Добавить уведомление</a><br>
             @endif
@@ -58,6 +58,7 @@ use App\Models\Classes\StudentClass;
             @if ($student->isHeadman && $ownerStudent->groupId == $student->groupId)
                 <a href="#">Добавить уведомление группе</a><br>
             @endif
+            </div>
             <br>
             @if ($student->id == $ownerStudent->id)
                 <div class="row">
@@ -68,7 +69,6 @@ use App\Models\Classes\StudentClass;
                             </div>
                         @endif
                         @foreach ($student->notifications as $note)
-                            {
                             <div class="GreyBox-2">
                                 <div class="text-center">
                                     <h3>{{$note->topic}}</h3>
@@ -78,6 +78,14 @@ use App\Models\Classes\StudentClass;
                                 </div>
                             </div>
                         @endforeach
+                    </div>
+                </div>
+            @else
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="text-center">
+                            <h1 style="color: red;">У вас нет доступа к просмотру чужих уведомлений</h1>
+                        </div>
                     </div>
                 </div>
             @endif
