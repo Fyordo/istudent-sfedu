@@ -15,7 +15,7 @@ class AccountController extends Controller
     /**
      * Авторизация
      */
-    public function login(Request $request)
+    public function login(Request $request, $message = null)
     {
         if ($request->isMethod('post')) {
             $validateFileds = $request->validate([
@@ -31,7 +31,9 @@ class AccountController extends Controller
             }
         }
 
-        return view("account.login");
+        return view("account.login", [
+            'message' => $message
+        ]);
     }
 
     /**
@@ -55,34 +57,31 @@ class AccountController extends Controller
             $validateFileds = $request->validate([
                 'groupId' => 'required',
                 'newPassword' => 'required',
-                'confirmNewPassword' => 'required'
+                'confirmNewPassword' => 'required|confirmed'
             ]);
 
-            if ($request->input('confirmNewPassword') == $request->input('newPassword'))
+            Student::where('id', Auth::id())->update([
+                'groupId' => (integer)$request->input('groupId'),
+                'password' => $request->input('newPassword'),
+                'isHeadman' => !($request->input('isHeadman') == null)
+            ]);
+
+            $studentFind = Student::where('email', Auth::user()["email"])->first();
+
+            if (!($request->input('isHeadman') == null))
             {
-                Student::where('id', Auth::id())->update([
-                    'groupId' => (integer)$request->input('groupId'),
-                    'password' => $request->input('newPassword'),
-                    'isHeadman' => !($request->input('isHeadman') == null)
-                ]);
-
-                $studentFind = Student::where('email', Auth::user()["email"])->first();
-
-                if (!($request->input('isHeadman') == null))
-                {
-                    Group::where("id", (integer)$request->input('groupId'))
-                        ->update([
-                            'headmanId' => Auth::id()
-                        ]);
-                }
-
-                Auth::logout();
-                Auth::login($studentFind, true);
-                return redirect(route('home'));
+                Group::where("id", (integer)$request->input('groupId'))
+                    ->update([
+                        'headmanId' => Auth::id()
+                    ]);
             }
+
+            Auth::logout();
+            Auth::login($studentFind, true);
+            return redirect(route('home'));
         }
 
-        $groupsDB = Group::all(); // Данные из БД
+        $groupsDB = Group::orderBy("groupCourse")->orderBy('groupNumber')->get(); // Данные из БД
         $groups = []; // Массив нормальных классов
 
         foreach ($groupsDB as $group){
@@ -181,6 +180,8 @@ class AccountController extends Controller
             ]);
         }
 
-        return redirect(route("login"));
+        return redirect(route("login", [
+            'message' => "Вы успешно зарегистрировались! Теперь введите свой логин (". $file->userPrincipalName .") и пароль (". $file->userPrincipalName .")"
+        ]));
     }
 }

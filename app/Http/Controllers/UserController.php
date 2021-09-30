@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes\GroupClass;
 use App\Models\Classes\StudentClass;
+use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,4 +27,6 @@ class UserController extends Controller
         $student = Student::where("id", $id)->first();
         return $student == null ? null : new StudentClass($student);
     }
+
+
 }

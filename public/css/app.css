@@ -7,7 +7,9 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-
+.container {
+    max-width: 1140px;
+}
 
 .student {
     padding: 5px; /* Поля вокруг текста */
@@ -52,7 +54,7 @@ header .navbar-brand {
 }
 
 .container .row .col-sm{
-    text-align: center
+    text-align: left;
 }
 
 header .nav-item .dropdown{

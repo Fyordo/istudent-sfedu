@@ -58,7 +58,7 @@ use App\Models\Classes\GroupClass;
                                 @endif
                             </p>
                             <p><b>Кол-во студентов:</b> {{ $group->countStudents() }}</p>
-                            <a href="#">
+                            <a href="{{route("fullSchedule", ['groupId' => $group->id])}}">
                                 Расписание группы
                             </a>
                         </div>

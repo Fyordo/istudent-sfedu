@@ -33,7 +33,7 @@ class GroupClass
     public function getStudents() : array
     {
         $arr = [];
-        $students = Student::where("groupId", $this->id)->get();
+        $students = Student::where("groupId", $this->id)->orderBy('name')->get();
 
         foreach ($students as $student)
         {

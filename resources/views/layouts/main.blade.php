@@ -3,6 +3,10 @@
     // asset("public/css/app.css")
     // asset("public/js/app.js")
     /* @var $student StudentClass */
+
+    $day = date("d", strtotime('+3 hours'));
+    $month = date("m", strtotime('+3 hours'));
+    $year = date("Y", strtotime('+3 hours'));
 ?>
 
 <html>
@@ -58,10 +62,10 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     @if ($student->email != "lagutinfedya@gmail.com")
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" href="{{ route("lessonList", ['groupId' => $student->groupId, 'day' => $day, 'month' => $month, 'year' => $year]) }}">
                                             Сегодня
                                         </a>
-                                        <a class="dropdown-item" href="#">Полное расписание</a>
+                                        <a class="dropdown-item" href="{{route("fullSchedule", ['groupId' => $student->groupId])}}">Полное расписание</a>
                                     @endif
                                     @if ($student->isHeadman)
                                         <a class="dropdown-item" href="#">Создать пару</a>

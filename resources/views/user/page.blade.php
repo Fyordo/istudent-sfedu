@@ -36,7 +36,7 @@ use App\Models\Classes\StudentClass;
         <div class="col-sm">
             <div class="GreyBox">
                 <div class="text-left">
-                    <a href="#"><b>Группа:</b> {{$ownerStudent->printGroup()}}</a><br><br>
+                    <a href="{{ route("group", ['id'=>$ownerStudent->groupId]) }}"><b>Группа:</b> {{$ownerStudent->printGroup()}}</a><br><br>
                     <b>Email:</b> {{ $ownerStudent->email }}<br>
                     @if ($ownerStudent->isHeadman)
                         <br>
