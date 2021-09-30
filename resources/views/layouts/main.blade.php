@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@yield("title")</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"/>
+    <link rel="shortcut icon" href="{{ asset('public/favicon.ico') }}">
     <link rel="stylesheet" href=" {{ asset("public/css/app.css") }} "/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
