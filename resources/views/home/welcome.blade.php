@@ -51,7 +51,7 @@ use App\Models\Classes\StudentClass;
         </div>
     @else
         <div class="text-center">
-            <h1 class="display-6">Событий нет. Их можно добавить <a href="#">здесь</a></h1>
+            <h1 class="display-6">Событий нет. Их можно добавить <a href=" {{route("page", ["id" => $student->id])}} ">здесь</a></h1>
         </div>
     @endif
 @else

@@ -11,6 +11,8 @@ Route::get('/', [HomeController::class, 'index'])->name("home");
 
 Route::get('/about', [HomeController::class, 'about'])->name("about");
 
+Route::get('/privacy', [HomeController::class, 'privacy'])->name("privacy");
+
 Route::middleware(['guest'])->group(function () {
 
     Route::get('/signin', [AccountController::class, 'signin'])->name("signin");

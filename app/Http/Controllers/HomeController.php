@@ -29,4 +29,14 @@ class HomeController extends Controller
             'student' => StudentClass::getStudent(Auth::user())
         ]);
     }
+
+    /**
+     * Политика конфиденциальности
+     */
+    public function privacy()
+    {
+        return view("home.privacy")->with([
+            'student' => StudentClass::getStudent(Auth::user())
+        ]);
+    }
 }
