@@ -15,7 +15,7 @@ class AccountController extends Controller
     /**
      * Авторизация
      */
-    public function login(Request $request, $message = null)
+    public function login(Request $request, $message = "")
     {
         if ($request->isMethod('post')) {
             $validateFileds = $request->validate([
@@ -142,7 +142,6 @@ class AccountController extends Controller
             'redirect_uri' => 'https://istudent-sfedu.herokuapp.com/callback',
         );
 
-        // use key 'http' even if you send the request to https://...
         $options = array(
             'http' => array(
                 'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -167,7 +166,18 @@ class AccountController extends Controller
 
         $isEmpty = Student::where('email', $file->userPrincipalName)->get()->isEmpty(); // Существует ли уже такой студент
 
-        if($isEmpty){
+        // Проверка, что почта sfedu-шная
+
+        $match = substr($file->userPrincipalName, strlen($file->userPrincipalName)-8, 8) === "sfedu.ru"
+        && $file->userPrincipalName[strlen($file->userPrincipalName)-9] === '@';
+
+        if (!$match){
+            return redirect(route("login", [
+                'message' => "Войти можно только через @sfedu.ru"
+            ]));
+        }
+
+        if ($isEmpty){
             DB::table('students')->insert([
                 [
                     'name' => $file->displayName,
@@ -178,9 +188,15 @@ class AccountController extends Controller
                 ]
             ]);
         }
+        else{
+            return redirect(route("login", [
+                'message' => "Такой пользователь уже есть"
+            ]));
+        }
 
-        return redirect(route("login", [
-            'message' => "Вы успешно зарегистрировались! Теперь введите свой логин (". $file->userPrincipalName .") и пароль (". $file->userPrincipalName .")"
-        ]));
+        $studentFind = Student::where('email', $file->userPrincipalName)->first();
+
+        Auth::login($studentFind, true);
+        return redirect(route('home'));
     }
 }
