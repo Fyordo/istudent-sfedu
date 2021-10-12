@@ -37,7 +37,7 @@ Route::middleware(['auth', 'studentConfirm'])->group(function () {
 
     // Группы
 
-    Route::get("/group/{id}", [GroupController::class, 'index'])->name('group');
+    Route::get("/group/one/{id}", [GroupController::class, 'index'])->name('group');
 
     Route::get("/group/all", [GroupController::class, 'all'])->name('all');
 
