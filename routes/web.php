@@ -19,12 +19,12 @@ Route::middleware(['guest'])->group(function () {
 
     Route::get('/callback', [AccountController::class, 'callback'])->name("callback");
 
-    Route::match(['get', 'post'], '/login/{message?}', [AccountController::class, 'login'])->name("login");
+    Route::match(['get', 'post'], '/auth/{message?}', [AccountController::class, 'login'])->name("login");
 });
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::match(['get', 'post'], '/login/add', [AccountController::class, 'add'])->name("loginAdd");
+    Route::match(['get', 'post'], '/data/add', [AccountController::class, 'add'])->name("loginAdd");
 
     Route::get('/logout', [AccountController::class, 'logout'])->name("logout");
 });
