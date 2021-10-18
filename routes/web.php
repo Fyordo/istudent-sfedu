@@ -88,5 +88,16 @@ Route::group(
                 Route::get('/get/{id}', [\App\Http\Controllers\Api\Student\ApiController::class, 'get']);
             }
         );
+
+        Route::group(
+            [
+                'prefix' => '/group'
+            ],
+            function () {
+                Route::get('/get/{id}', [\App\Http\Controllers\Api\Group\ApiController::class, 'get']);
+                Route::get('/students/{id}', [\App\Http\Controllers\Api\Group\ApiController::class, 'getStudents']);
+                Route::get('/all', [\App\Http\Controllers\Api\Group\ApiController::class, 'all']);
+            }
+        );
     }
 );

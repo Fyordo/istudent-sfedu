@@ -6,13 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Models\Classes\StudentClass;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
     public function get(Request $request, int $id)
     {
         $token = $request->header("token");
+        if ($token == "")
+        {
+            $array = [
+                'error' => 'Ошибка доступа'
+            ];
+            return response()->json($array);
+        }
+
         $access = Student::where("token", $token)->first();
         if (isset($access))
         {
