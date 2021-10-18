@@ -17,6 +17,7 @@ class ApiController extends Controller
         if (isset($access))
         {
             $studentDB = Student::where("id", $id)->first();
+
             if (isset($studentDB))
             {
                 $student = StudentClass::getStudent($studentDB);
