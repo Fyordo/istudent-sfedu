@@ -16,7 +16,7 @@ class ApiController extends Controller
         $studentDB = Student::where("token", $token)->first();
         if (isset($studentDB))
         {
-            $student = StudentClass::getStudent($studentDB);
+            $student = StudentClass::getStudent(Student::where("id", $id)->first());
             return response()->json($student);
         }
         else
