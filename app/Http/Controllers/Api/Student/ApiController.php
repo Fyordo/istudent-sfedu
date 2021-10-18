@@ -13,11 +13,23 @@ class ApiController extends Controller
     public function get(Request $request, int $id)
     {
         $token = $request->header("token");
-        $studentDB = Student::where("token", $token)->first();
-        if (isset($studentDB))
+        $access = Student::where("token", $token)->first();
+        if (isset($access))
         {
-            $student = StudentClass::getStudent(Student::where("id", $id)->first());
-            return response()->json($student);
+            $studentDB = Student::where("id", $id)->first();
+            if (isset($studentDB))
+            {
+                $student = StudentClass::getStudent($studentDB);
+                return response()->json($student);
+            }
+            else
+            {
+                $array = [
+                    'error' => 'Такого студента нет'
+                ];
+                return response()->json($array);
+            }
+
         }
         else
         {
