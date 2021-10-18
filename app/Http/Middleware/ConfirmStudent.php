@@ -21,7 +21,6 @@ class ConfirmStudent
         if (Auth::check()){
             $student = Auth::user();
 
-
             if ($student["groupId"] == 0){
                 return redirect(route("loginAdd"));
             }

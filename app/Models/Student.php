@@ -23,6 +23,7 @@ class Student extends Authenticatable
     public string $name;
     public string $email;
     private string $password;
+    public string $token;
     public int $groupId;
     public bool $isHeadman;
 
@@ -36,6 +37,7 @@ class Student extends Authenticatable
         'email',
         'password',
         'groupId',
+        'token',
         'isHeadman'
     ];
 

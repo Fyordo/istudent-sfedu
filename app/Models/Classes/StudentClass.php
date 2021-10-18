@@ -10,6 +10,7 @@ class StudentClass
     public int $id;
     public string $name;
     public string $email;
+    public string $token;
     public int $groupId;
     public bool $isHeadman;
     public array $notifications;
@@ -18,6 +19,7 @@ class StudentClass
         $this->id = $arr["id"];
         $this->name = $arr["name"];
         $this->email = $arr["email"];
+        $this->token = $arr["token"];
         $this->groupId = $arr["groupId"];
         $this->isHeadman = $arr["isHeadman"];
         $this->notifications = [];

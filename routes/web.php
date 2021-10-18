@@ -20,6 +20,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/callback', [AccountController::class, 'callback'])->name("callback");
 
     Route::match(['get', 'post'], '/auth/{message?}', [AccountController::class, 'login'])->name("login");
+
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -33,17 +34,59 @@ Route::middleware(['auth', 'studentConfirm'])->group(function () {
 
     // Пользователь
 
-    Route::get("/page/{id?}", [UserController::class, 'page'])->name('page');
+    Route::group(
+        [
+            'prefix' => '/page'
+        ],
+        function () {
+            Route::get("/{id?}", [UserController::class, 'page'])->name('page');
+        }
+    );
 
-    // Группы
+    Route::group(
+        [
+            'prefix' => '/group'
+        ],
+        function () {
+            Route::get("/one/{id}", [GroupController::class, 'index'])->name('group');
+            Route::get("/all", [GroupController::class, 'all'])->name('all');
+        }
+    );
 
-    Route::get("/group/one/{id}", [GroupController::class, 'index'])->name('group');
+    Route::group(
+        [
+            'prefix' => '/schedule'
+        ],
+        function () {
+            Route::get("/list/{groupId}/{day}/{month}/{year}", [LessonController::class, 'list'])->name('lessonList');
+            Route::get("/all/{groupId}", [LessonController::class, 'full'])->name('fullSchedule');
+        }
+    );
 
-    Route::get("/group/all", [GroupController::class, 'all'])->name('all');
 
-    // Расписание
-
-    Route::get("/schedule/list/{groupId}/{day}/{month}/{year}", [LessonController::class, 'list'])->name('lessonList');
-
-    Route::get("/schedule/all/{groupId}", [LessonController::class, 'full'])->name('fullSchedule');
 });
+
+Route::group(
+    [
+        'prefix' => '/api'
+    ],
+    function () {
+        Route::group(
+            [
+                'prefix' => '/auth'
+            ],
+            function () {
+                Route::get('/login', [\App\Http\Controllers\Api\Auth\ApiController::class, 'login']);
+            }
+        );
+
+        Route::group(
+            [
+                'prefix' => '/student'
+            ],
+            function () {
+                Route::get('/get/{id}', [\App\Http\Controllers\Api\Student\ApiController::class, 'get']);
+            }
+        );
+    }
+);
