@@ -99,5 +99,15 @@ Route::group(
                 Route::get('/all', [\App\Http\Controllers\Api\Group\ApiController::class, 'all']);
             }
         );
+
+        Route::group(
+            [
+                'prefix' => '/schedule'
+            ],
+            function () {
+                Route::get('/list/{group_id}/{day}/{month}/{year}', [\App\Http\Controllers\Api\Schedule\ApiController::class, 'list']);
+                Route::get('/full/{group_id}', [\App\Http\Controllers\Api\Schedule\ApiController::class, 'full']);
+            }
+        );
     }
 );
